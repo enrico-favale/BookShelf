@@ -1,5 +1,4 @@
 import { BookOpen, Star, BookmarkPlus, Users } from "lucide-react";
-
 import { Link } from "react-router-dom";
 import DarkModeToggle from "../components/DarkModeToggle";
 import Button from "../components/Button";
@@ -12,8 +11,8 @@ export default function Home() {
       <header className="container mx-auto px-6 py-8">
         <nav className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <BookOpen className="h-12 w-12 text-primary" />
-            <span className="text-4xl font-bold text-primary">BookShelf</span>
+            <BookOpen className="h-8 w-8 text-primary" />
+            <span className="text-2xl font-bold text-primary">BookShelf</span>
           </div>
           <div className="flex gap-4">
             <Link to="/login">
@@ -28,9 +27,9 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <main className="container mx-auto px-6">
+      <main className="container mx-auto px-4">
 
-        <section className="py-20 text-center">
+        <section className="py-8 text-center">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
               <h1 className="text-5xl lg:text-6xl font-bold text-primary leading-tight">
@@ -42,13 +41,13 @@ export default function Home() {
                 Scansiona, organizza e tieni traccia di tutti i tuoi libri preferiti. 
                 Crea la tua collezione personale con note, valutazioni e molto altro.
               </p>
-              <div className="flex gap-4 justify-center">
+              {/* <div className="flex gap-4 justify-center">
                 <Link to="/register">
                   <Button>
                     Inizia Gratis
                   </Button>
                 </Link>
-              </div>
+              </div> */}
             </div>
             <div className="relative animate-float">
               <img 
@@ -61,7 +60,7 @@ export default function Home() {
         </section>
 
         {/* Features */}
-        <section className="py-20">
+        <section className="py-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-primary mb-4">
               Tutto quello che ti serve per i tuoi libri
