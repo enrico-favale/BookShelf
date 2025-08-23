@@ -9,8 +9,8 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-hero">
       {/* Header */}
       <header className="container mx-auto px-6 py-8">
-        <nav className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
+        <nav className="md:flex justify-between items-center">
+          <div className="flex items-center gap-2 mb-4 md:mb-0">
             <BookOpen className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold text-primary">BookShelf</span>
           </div>
@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero Section */}
       <main className="container mx-auto px-4">
 
-        <section className="py-8 text-center">
+        <section className="md:py-8 text-center">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
               <h1 className="text-5xl lg:text-6xl font-bold text-primary leading-tight">

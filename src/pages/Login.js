@@ -1,10 +1,32 @@
+import { useState } from "react";
 import { BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "../context/AuthContext";
 import Label from "../components/Label";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const { login } = useAuth();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      await login(email, password);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Errore di login:", error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-6">
       <div className="w-full max-w-md space-y-8">
@@ -24,25 +46,32 @@ export default function Login() {
           </div>
 
           {/* Form di Login */}
+          <form className="p-6 py-0 space-y-4" onSubmit={handleLogin}>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <form className="p-6 py-0 space-y-4">
             <div>
-              <Label forID="email">Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                id="email" 
-                type="email" 
+                id="email"
+                type="email"
                 placeholder="la.tua@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-background border-border focus:ring-primary"
+                required
               />
             </div>
 
             <div>
-              <Label forID="password">Password</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
-                id="password" 
-                type="password" 
+                id="password"
+                type="password"
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-background border-border focus:ring-primary"
+                required
               />
             </div>
 
@@ -53,7 +82,7 @@ export default function Login() {
                   id="remember"
                   className="rounded border-border text-primary focus:ring-primary"
                 />
-                <Label forId="remember" className="text-sm font-normal">
+                <Label htmlFor="remember" className="text-sm font-normal">
                   Ricordami
                 </Label>
               </div>
@@ -62,11 +91,9 @@ export default function Login() {
               </Link>
             </div>
 
-            <Link to="/dashboard">
-              <Button type="button"  className="w-full shadow-card mt-2">
-                Accedi alla Libreria
-              </Button>
-            </Link>
+            <Button type="submit" className="w-full shadow-card mt-2">
+              Accedi alla Libreria
+            </Button>
           </form>
 
           <div className="text-center text-sm text-muted-foreground py-4">
