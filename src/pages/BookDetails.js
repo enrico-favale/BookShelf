@@ -218,7 +218,7 @@ export default function BookDetails() {
                             ({currentRating}/5)
                           </span>
                         )}
-                        {currentRating > 0 && (
+                        {currentRating > 0 & isEditing && (
                           <Button
                             size="sm"
                             onClick={handleResetRating}
