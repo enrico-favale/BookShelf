@@ -1,14 +1,11 @@
-import { auth } from "../firebase";
-import { signOut } from "firebase/auth";
 import { useAuth } from "../context/AuthContext";
 
 export default function LogoutButton() {
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
       logout();
-      alert("Logout effettuato con successo!");
       window.location.href = "/"; // Reindirizza alla home (opzionale)
     } catch (error) {
       console.error("Errore durante il logout:", error);
@@ -18,7 +15,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90 shadow-card transition"
+      className={`inline-flex items-center justify-center hover:bg-primary/90 dark:hover:bg-primary/90 hover:text-white hover:scale-105 border border-ring rounded-md p-2 text-md px-4 bg-card text-card-foreground hover:shadow-card transition-all duration-200`}
     >
       Logout
     </button>

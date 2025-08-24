@@ -10,11 +10,11 @@ export default function Home() {
       {/* Header */}
       <header className="container mx-auto px-6 py-8">
         <nav className="md:flex justify-between items-center">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
+          <div className="flex justify-center items-center gap-2 mb-4 md:mb-0">
             <BookOpen className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold text-primary">BookShelf</span>
           </div>
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-4">
             <Link to="/login">
               <Button>Accedi</Button>
             </Link>
@@ -41,13 +41,6 @@ export default function Home() {
                 Scansiona, organizza e tieni traccia di tutti i tuoi libri preferiti. 
                 Crea la tua collezione personale con note, valutazioni e molto altro.
               </p>
-              {/* <div className="flex gap-4 justify-center">
-                <Link to="/register">
-                  <Button>
-                    Inizia Gratis
-                  </Button>
-                </Link>
-              </div> */}
             </div>
             <div className="relative animate-float">
               <img 
