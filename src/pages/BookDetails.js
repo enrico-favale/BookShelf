@@ -121,7 +121,7 @@ export default function BookDetails() {
             <div className="p-6 pb-4">
               <div className="text-center space-y-4">
                 <img
-                  src={book.thumbnail ? book.thumbnail : "/no_cover_thumb.gif"}
+                  src={book.thumbnail ? book.thumbnail : `${process.env.PUBLIC_URL}/no_cover_thumb.gif`}
                   alt={`Copertina di ${book.title}`}
                   className="w-full max-w-64 mx-auto rounded-lg shadow-book"
                 />
