@@ -34,6 +34,7 @@ export default function AddBook() {
         setBookData({
           title: book.title,
           authors: book.authors?.join(", ") || "Autore sconosciuto",
+          categories: book.categories?.join(", ") || "Data not found",
           thumbnail: book.imageLinks?.thumbnail || "no_cover_thumb.gif",
           publishedDate: book.publishedDate || "Data not found",
           pageCount: book.pageCount || "Data not found",
@@ -42,11 +43,9 @@ export default function AddBook() {
         });
       } else {
         setBookData(null);
-        alert("Nessun libro trovato per questo ISBN");
       }
     } catch (err) {
       console.error(err);
-      alert("Errore durante la ricerca del libro");
     } finally {
       setIsLoading(false);
     }
@@ -68,6 +67,7 @@ export default function AddBook() {
       isbn,
       title: bookData.title,
       authors: bookData.authors,
+      categories: bookData.categories,
       publisher: bookData.publisher,
       publishedDate: bookData.publishedDate,
       pageCount: bookData.pageCount,
@@ -78,21 +78,20 @@ export default function AddBook() {
       createdAt: new Date(),
     };
 
-    if (bookData.thumbnail && bookData.thumbnail !== "no_cover_thumb.gif") {
-      bookToSave.thumbnail = bookData.thumbnail;
-    }
+    bookToSave.thumbnail = bookData.thumbnail != "no_cover_thumb.gif" ? bookData.thumbnail : "";
 
     try {
       await addDoc(collection(db, "users", user.uid, "books"), bookToSave);
-      alert("Libro aggiunto con successo!");
+
       setBookData(null);
+
       setIsbn("");
       setSelectedStatus("wishlist");
       setRating(0);
       setNotes("");
+
     } catch (err) {
       console.error(err);
-      alert("Errore durante il salvataggio del libro");
     }
   };
 
@@ -229,6 +228,12 @@ export default function AddBook() {
                             {bookData.language.toUpperCase()}
                           </p>
                         </div>
+                        <div>
+                          <span className="font-medium">Categorie:</span>
+                          <p className="text-muted-foreground">
+                            {bookData.categories}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -298,6 +303,28 @@ export default function AddBook() {
                     <Plus className="h-4 w-4 mr-2" />
                     Aggiungi alla Libreria
                   </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* No results message */}
+          {isbn && !bookData && !isLoading && (
+            <div className="rounded-lg border bg-card text-card-foreground shadow-sm bg-gradient-card shadow-card mb-8 text-center p-8">
+              <div className="space-y-4">
+                <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
+                  <Search className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-primary mb-2">
+                    Libro non trovato
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Non riusciamo a trovare un libro con ISBN: <strong>{isbn}</strong>
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Verifica che l'ISBN sia corretto e riprova
+                  </p>
                 </div>
               </div>
             </div>

@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddBook from "./pages/AddBook";
 import NotFound from "./pages/NotFound";
+import BookDetails from "./pages/BookDetails";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -33,6 +34,15 @@ function App() {
             element={
               <PrivateRoute>
                 <AddBook/>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/book/:id"
+            element={
+              <PrivateRoute>
+                <BookDetails />
               </PrivateRoute>
             }
           />
